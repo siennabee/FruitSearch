@@ -1,0 +1,77 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:focus {
+  outline: none;
+}
+
+body {
+  background: linear-gradient(
+    90deg,
+    rgba(252, 201, 69, 1) 36%,
+    rgba(228, 68, 0, 1) 85%
+  );
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input {
+  border-radius: 15px;
+  border: none;
+  width: 500px;
+  max-width: 75vw;
+  min-width: 10vw;
+  height: 50px;
+  padding: 0px 0px 0px 10px; /* left side needs a bit of padding */
+}
+
+/* when there is a suggestion, remove border radius for bottom of input and add border to bottom to seperate user text from suggestions */
+input.hasSuggestions {
+  border-radius: 15px 15px 0px 0px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.search-container {
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -15px);
+}
+
+.search-container input,
+.search-container .suggestions {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* round the bottom corners of suggestion box */
+.search-container .suggestions {
+  cursor: pointer;
+  border-radius: 0px 0px 15px 15px;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+ul.hasSuggestions {
+  padding-bottom: 10px;
+}
+
+/* remove bullet points and add spacing between li */
+ul li {
+  list-style-type: none;
+  padding: 10px 0px 10px 10px;
+}
+
+ul li:hover {
+  background-color: rgba(173, 116, 2, 0.25);
+  cursor: pointer;
+}
