@@ -5,7 +5,7 @@
 }
 
 :focus {
-  outline: none;
+  outline: #ff6b27 auto 5px;
 }
 
 body {
@@ -30,7 +30,7 @@ input {
   padding: 0px 0px 0px 10px; /* left side needs a bit of padding */
 }
 
-/* when there is a suggestion, remove border radius for bottom of input and add border to bottom to seperate user text from suggestions */
+/* when there is a suggestion, remove border radius for bottom of input and add border to bottom to separate user text from suggestions */
 input.hasSuggestions {
   border-radius: 15px 15px 0px 0px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.25);
@@ -45,24 +45,29 @@ input.hasSuggestions {
   transform: translate(-50%, -15px);
 }
 
-.search-container input,
-.search-container .suggestions {
+.search-container input {
   background-color: rgba(255, 255, 255, 0.25);
 }
 
 /* round the bottom corners of suggestion box */
 .search-container .suggestions {
+  background-color: rgba(255, 255, 255, 0.25);
   cursor: pointer;
-  border-radius: 0px 0px 15px 15px;
+  border-radius: 15px 15px 0px 0px;
 }
 
 ul {
   padding: 0;
   margin: 0;
+  max-height: 35%;
+  /* overflow-y: auto; */
 }
 
 ul.hasSuggestions {
   padding-bottom: 10px;
+  border-radius: 0px 0px 15px 15px;
+  max-height: 35vw;
+  overflow-y: auto;
 }
 
 /* remove bullet points and add spacing between li */

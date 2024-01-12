@@ -83,11 +83,6 @@ const fruit = [
   "Yuzu",
 ];
 
-// testing to see if key inputs work:
-// input.addEventListener("keydown", function (event) {
-//   console.log("You pressed a key.");
-// });
-
 //filters for fruits that match the str
 function search(str) {
   return fruit.filter((val) => {
@@ -98,64 +93,43 @@ function search(str) {
 
 //fruit array gets filtered based on user input value and then get displayed as suggestions below search bar
 function searchHandler(e) {
-  let userInput = input.value;
-  const results = search(userInput.toLowerCase());
-  showSuggestions(results, userInput);
+  const results = search(input.value.toLowerCase());
+  showSuggestions(results, input.value);
 }
 
-//only shows the top 10 results
-function showSuggestions(result, inputVal) {
-  const topTenResults = result.slice(0, 10);
-  clearSuggestion();
-  if (inputVal !== "") {
-    //won't display suggestions when user input is empty
-    input.className = "hasSuggestions";
-    suggestions.className = "hasSuggestions";
-    for (let fruit of topTenResults) {
-      const li = document.createElement("li");
-      li.innerHTML = boldText(fruit, inputVal);
-      suggestions.append(li);
-    }
-  }
-}
-
-// makes the first instance of the text that matches the fruit array bold
-function boldText(str, subStr) {
-  let lowerCaseStr = str.toLowerCase();
-  let subStrIndex = lowerCaseStr.indexOf(subStr.toLowerCase());
-  if (subStrIndex === 0) {
-    //if the first letter matches, it should be uppercase
-    return (
-      "<b>" +
-      subStr[0].toUpperCase() +
-      subStr.slice(1).toLowerCase() +
-      "</b>" +
-      str.slice(subStrIndex + subStr.length)
-    );
-  }
-  return (
-    str.slice(0, subStrIndex) +
-    "<b>" +
-    subStr.toLowerCase() +
-    "</b>" +
-    str.slice(subStrIndex + subStr.length)
-  );
-}
-
-function clearSuggestion() {
-  input.className = "";
-  suggestions.className = "";
+function showSuggestions(results, query) {
   suggestions.innerHTML = "";
+
+  if (results.length > 0) {
+    for (i = 0; i < results.length; i++) {
+      let item = results[i];
+
+      // Highlight first string match (Optional).
+      // The "i" flag modifier is used to perform case-insensitive matching in the string.
+      const match = item.match(new RegExp(query, "i"));
+      item = item.replace(match[0], `<b>${match[0]}</b>`);
+
+      suggestions.innerHTML += `<li>${item}</li>`;
+    }
+    input.classList.add("hasSuggestions");
+    suggestions.classList.add("hasSuggestions");
+  } else {
+    results = [];
+    suggestions.innerHTML = "";
+    suggestions.classList.remove("hasSuggestions");
+    input.classList.remove("hasSuggestions");
+  }
 }
 
-//click event where the suggestion that is clicked on get displayed on search box. rest of the suggestions are cleared
+// set the value of input to the selected suggestion
 function useSuggestion(e) {
-  if (e.target.tagName === "B") {
-    input.value = e.target.parentElement.innerText;
-  } else {
-    input.value = e.target.innerText;
-  }
-  clearSuggestion();
+  input.value = e.target.innerText;
+  input.focus();
+  // clear or close the suggestion list
+  suggestions.innerHTML = "";
+  suggestions.classList.remove("hasSuggestions");
+  //removes the class so that the input goes back to being rounded
+  input.classList.remove("hasSuggestions");
 }
 
 input.addEventListener("keyup", searchHandler);
