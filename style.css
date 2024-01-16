@@ -24,7 +24,6 @@ input {
   border-radius: 15px;
   border: none;
   width: 500px;
-  max-width: 75vw;
   min-width: 10vw;
   height: 50px;
   padding: 0px 0px 0px 10px; /* left side needs a bit of padding */
@@ -32,6 +31,7 @@ input {
 
 /* when there is a suggestion, remove border radius for bottom of input and add border to bottom to separate user text from suggestions */
 input.hasSuggestions {
+  max-height: 30vw;
   border-radius: 15px 15px 0px 0px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.25);
 }
@@ -51,22 +51,23 @@ input.hasSuggestions {
 
 /* round the bottom corners of suggestion box */
 .search-container .suggestions {
+  max-height: 20vw;
   background-color: rgba(255, 255, 255, 0.25);
   cursor: pointer;
-  border-radius: 15px 15px 0px 0px;
+  border-radius: 0px 0px 15px 15px;
 }
 
 ul {
+  max-height: 30%;
   padding: 0;
   margin: 0;
-  max-height: 35%;
   /* overflow-y: auto; */
 }
 
 ul.hasSuggestions {
-  padding-bottom: 10px;
+  /* padding-bottom: 10px; */
   border-radius: 0px 0px 15px 15px;
-  max-height: 35vw;
+  max-height: 20vw;
   overflow-y: auto;
 }
 
@@ -79,4 +80,19 @@ ul li {
 ul li:hover {
   background-color: rgba(173, 116, 2, 0.25);
   cursor: pointer;
+}
+
+.footer {
+  font-family: "Amita", serif;
+  font-family: "Croissant One", serif;
+  font-family: "Laila", serif;
+  font-family: "Playfair Display", serif;
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  position: fixed;
+  opacity: 0.3;
+  /* keep the footer at the bottom of the page */
+  top: 96.5%;
+  left: 50%;
+  transform: translate(-50%, 50%);
 }
