@@ -85,6 +85,10 @@ const fruit = [
 
 //filters for fruits that match the str
 function search(str) {
+  //if there is nothing in the search bar, the suggestions list will not be displayed
+  if (str === "") {
+    return [];
+  }
   return fruit.filter((val) => {
     let lowerCaseVal = val.toLowerCase();
     return lowerCaseVal.includes(str);
@@ -92,7 +96,7 @@ function search(str) {
 }
 
 //fruit array gets filtered based on user input value and then get displayed as suggestions below search bar
-function searchHandler(e) {
+function searchHandler() {
   const results = search(input.value.toLowerCase());
   showSuggestions(results, input.value);
 }
@@ -103,9 +107,8 @@ function showSuggestions(results, query) {
   if (results.length > 0) {
     for (i = 0; i < results.length; i++) {
       let item = results[i];
-
-      // Highlight first string match (Optional).
-      // The "i" flag modifier is used to perform case-insensitive matching in the string.
+      // highlight first string match
+      // the "i" flag modifier is used to perform case-insensitive matching in the string
       const match = item.match(new RegExp(query, "i"));
       item = item.replace(match[0], `<b>${match[0]}</b>`);
 
